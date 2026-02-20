@@ -19,3 +19,15 @@ it("works on capital letters", () => {
 it("don't shift non-letters", () => {
   expect(ceasarCipher("a!bce", 3)).toBe("d!efh");
 });
+
+it("works with super high shift value, lowercase", () => {
+  expect(ceasarCipher("abc", 5320)).toBe("qrs");
+});
+
+it("works with super high shift value, uppercase", () => {
+  expect(ceasarCipher("ABC", 333)).toBe("VWX");
+});
+
+it("works with super high shift value, uppercase", () => {
+  expect(ceasarCipher("abc", 26)).toBe("abc");
+});

@@ -24,19 +24,23 @@ export function calculator(num1, num2, operator) {
 
 export function ceasarCipher(string, shift) {
   let split = string.split("");
-  split = split.map((char) => char.charCodeAt(0));
-  split = split.map((code) => {
-    if (code < 65 || (code > 90 && code < 97) || code > 122) return code;
+  split = split.map((char) => {
+    const code = char.charCodeAt(0);
 
-    const shifted = code + shift;
-    if (shifted > 122 || (shifted > 90 && shifted < 97)) {
-      return shifted - 26;
-    } else {
-      return shifted;
+    if (code < 65 || (code > 90 && code < 97) || code > 122) {
+      return String.fromCharCode(code);
     }
-  });
-  split = split.map((code) => String.fromCharCode(code));
 
+    const isCapital = code >= 65 && code <= 90;
+
+    const index = isCapital
+      ? (code + shift - 65) % 26
+      : (code + shift - 97) % 26;
+
+    return isCapital
+      ? String.fromCharCode(index + 65)
+      : String.fromCharCode(index + 97);
+  });
   return split.join("");
 }
 
